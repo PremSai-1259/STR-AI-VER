@@ -98,11 +98,6 @@ li{
     margin-left:80px ;
 }
 
-
-
-
-
-
 form{
     display: flex;
     flex-direction: column;
@@ -116,7 +111,151 @@ form{
     padding-top: -300px;
 }
 
-#condiv{
+
+#condiv2{
     margin-left: 80px;
     font-size: 20px;
+}
+
+/*LAPTOP*/
+@media screen and (min-width:992px) and (max-width : 1200px){
+    #intro{
+        font-size: 23px;
+    }
+    #profile{
+       bottom: 15%;
+       height: 400px;
+       top: 5%;
+    }
+    table{
+        margin-top: 30px;
+        margin-right: auto;
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    #expdiv{
+        font-size: 20px;
+    }
+    #interdiv{
+        margin-top: 5%;
+    }
+    form{
+        width: 300px;
+        margin-top: 30px;
+        margin-right:auto;
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+}
+
+/*Tablets*/
+@media screen and (min-width: 768px) and (max-width: 991px){
+   *{
+    font-size: 15px;
+    overflow-x: hidden;
+   }
+   #intro{
+    width: 300px;
+    margin-left:10px;
+   }
+   #profile{
+    height: 300px;
+    width: 300px;
+   }
+   table{
+     width: 550px;
+     margin-top: 30px;
+     margin-right:auto;
+     margin-bottom: auto;
+     margin-left: auto;
+   }
+   li{
+    font-size: 25px;
+   }
+   #interdiv{
+    margin-top: 30px;
+   }
+   #eventify{
+    width: 250px;
+    margin-right: 50px;
+   }
+   form{
+    width: 250px;
+    margin-top: 30px;
+    margin-right:auto;
+    margin-bottom: auto;
+    margin-left: auto;
+   }
+}
+
+/*Mobile*/
+@media screen and (max-width: 767px) {
+    body, html {
+        overflow-x: hidden;
+    
+    }
+    #butbox {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-top: 5px;
+    }
+    #top {
+        left: 85%;
+    }
+    #amdiv {
+        flex-direction: column;
+        align-items: center;
+    }
+    #profile {
+        width: 150px;
+        height: 200px;
+        float: none;
+        margin-bottom: 10px;
+    }
+    #intro {
+        font-size: 14px;
+        margin-top: 10px;
+        width: 450px;
+        margin-left: 20px;
+    }
+    table {
+        width: 95%;
+        font-size: 14px;
+        margin-top: 30px;
+        margin-left: auto;
+        margin-top: auto;
+        margin-bottom: top;
+    }
+    tr, td {
+        font-size: 12px;
+    }
+    #interdiv {
+        font-size: 25px;
+        margin-left: 10px;
+    }
+     li {
+        font-size: 16px;
+    }
+    #expdiv{
+        font-size: 14px;
+        margin-left: 20px;
+    }
+    #eventify {
+        width: 200px;
+        height: 200px;
+        float:right;
+    }
+    form {
+        width: 200px;
+        font-size: 16px;
+        margin-top: 30px;
+        margin-right:auto;
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    #condiv2{
+        font-size: 15px;
+        margin-left: 20px;
+    }   
 }
