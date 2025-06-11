@@ -1,3 +1,7 @@
+*{
+    background-color:#FAF3E0;
+    color: #2F3E46;
+}
 header{
     height: 100vh;
 }
@@ -17,6 +21,10 @@ section{
 h1{
     font-size: 50px;
     text-align: center;
+    color: #006D5B ;
+}
+h2{
+    color: #A7C957;
 }
 
 #top{
@@ -72,6 +80,8 @@ button{
 
 button:hover{
     cursor: pointer;
+    background-color: #005248;
+    color: white;
 }
 
 #interdiv{
