@@ -11,15 +11,14 @@ import Dashboard from "./pages/Udashboard";
 import Roadmap from "./pages/Roadmap";
 import Practice from "./pages/Practice";
 import Arrays from "./pages/Topics/Array";
-import Queues from "./pages/Topics/Queues";
-import Sets from "./pages/Topics/Sets";
-import Maps from "./pages/Topics/Maps";
 import Vectors from "./pages/Topics/Vectors";
-import List from "./pages/Topics/List";
-import Deques from "./pages/Topics/Deques";
 import Stacks from "./pages/Topics/Stacks";
+import Sets from "./pages/Topics/Sets";
+import List from "./pages/Topics/List";
+import Maps from "./pages/Topics/Maps";
+import Deques from "./pages/Topics/Deques";
+import Queues from "./pages/Topics/Queues";
 import { Route,Routes } from "react-router-dom";
-
 function App() {
   return (
      <Routes>
