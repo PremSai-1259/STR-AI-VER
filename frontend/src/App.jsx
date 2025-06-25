@@ -10,14 +10,14 @@ import LandingPage from "./pages/Landing";
 import Dashboard from "./pages/Udashboard";
 import Roadmap from "./pages/Roadmap";
 import Practice from "./pages/Practice";
-import Arrays from "./pages/Topics/Array";
-import Vectors from "./pages/Topics/Vectors";
-import Stacks from "./pages/Topics/Stacks";
-import Sets from "./pages/Topics/Sets";
-import List from "./pages/Topics/List";
-import Maps from "./pages/Topics/Maps";
-import Deques from "./pages/Topics/Deques";
-import Queues from "./pages/Topics/Queues";
+import Arrays from "./pages/Array";
+import Vectors from "./pages/Vectors";
+import Stacks from "./pages/Stacks";
+import Sets from "./pages/Sets";
+import List from "./pages/List";
+import Maps from "./pages/Maps";
+import Deques from "./pages/Deques";
+import Queues from "./pages/Queues";
 import { Route,Routes } from "react-router-dom";
 function App() {
   return (
