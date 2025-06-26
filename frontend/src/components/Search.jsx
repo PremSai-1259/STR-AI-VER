@@ -11,6 +11,7 @@ const topics = [
   "Queues",
   "Sets",
   "Maps",
+  "Algorithms"
 ];
 
 export default function PracticeTopicGrid() {
