@@ -55,6 +55,7 @@ export default function Roadmap() {
 
 //ROADMAP TO DB
   async function post_data(){
+    if(roadmap){
     const{d}= await supabase.from("Roadmaps").delete().eq("id",user.id)
     const{data,error}=await supabase.from("Roadmaps").insert([{
       "id":user.id,
@@ -66,6 +67,11 @@ export default function Roadmap() {
     }
     else{
       alert("data is added")
+    }
+    }
+  else{
+    alert("Generate a roadmap first or get your old stored road map")
+    return
     }
   }
 
