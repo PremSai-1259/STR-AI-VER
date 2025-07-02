@@ -2,6 +2,7 @@ import { useUser } from "@clerk/clerk-react";
 import { useState } from "react";
 import { SignOutButton } from "@clerk/clerk-react";
 import BrainLoading from "../components/Loading";
+import supabase from "../lib/supadb";
 
 
 export default function Roadmap() {
@@ -52,50 +53,105 @@ export default function Roadmap() {
   }
 };
 
+//ROADMAP TO DB
+  async function post_data(){
+    const{d}= await supabase.from("Roadmaps").delete().eq("id",user.id)
+    const{data,error}=await supabase.from("Roadmaps").insert([{
+      "id":user.id,
+      "roadmap":roadmap,
+    }])
+    if(error){
+      console.log("error",error.message)
+      alert("error",error.message)
+    }
+    else{
+      alert("data is added")
+    }
+  }
+
+//GET ROADMAP
+async function get_roadmap(id){
+  const{data}=await supabase.from("Roadmaps").select().eq("id",id)
+  if (error) {
+    console.log("Fetch error", error.message);
+    return;
+  }
+
+  if (data) {
+    setRoadmap(data[0].roadmap); 
+  } else {
+    setRoadmap("No roadmap found.");
+  }
+}
   if(loading){
             return(<BrainLoading/>)
         }
   return (
-    <div className="w-screen min-h-screen bg-[#182035] px-4 py-6">
-       <div className="w-full flex flex-wrap items-center justify-between py-4 px-4 rounded-md mb-6 bg-[#00000033]">
-          <div className="flex items-center gap-4 mb-4 sm:mb-0">
-          <img src={user.imageUrl} alt="Profile" className="w-[60px] h-[60px] mx-5 mt-1 rounded-[100%]" />
-          <p className="text-4xl text-[#38bdf8] sm:text-3xl md:text-4xl  font-extrabold">{user.fullName}</p>
-          </div>
-        <div className="mt-[10px]"><SignOutButton>
-          <button className="w-32 sm:w-40 h-12 sm:h-14 bg-[#ba303c] hover:bg-red-700 text-white text-lg sm:text-xl rounded-xl transition border-2 border-[#ba303c] hover:border-red-700">Log Out</button>
-          </SignOutButton>
-        </div>
-        </div>
-      <h1 className="text-2xl md:text-3xl font-bold text-center mb-6 text-[#38bdf8] ">
-        🧠 AI-Powered DSA Roadmap
-      </h1>
-
+  <div className="min-h-screen w-full bg-[#182035] px-4 py-6">
+    
+    <div className=" mx-auto flex flex-col sm:flex-row items-center justify-between py-4 px-4 rounded-md mb-6 bg-[#00000033]">
+      <div className="flex items-center gap-4 mb-4 sm:mb-0">
+        <img
+          src={user.imageUrl}
+          alt="Profile"
+          className="w-[60px] h-[60px] rounded-full"
+        />
+        <p className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#38bdf8]">
+          {user.fullName}
+        </p>
+      </div>
+      <SignOutButton>
+        <button className="w-32 sm:w-40 h-12 bg-[#ba303c] hover:bg-red-700 text-white text-lg rounded-xl transition border-2 border-[#ba303c] hover:border-red-700">
+          Log Out
+        </button>
+      </SignOutButton>
+    </div>
+    <h1 className="text-2xl md:text-3xl font-bold text-center mb-6 text-[#38bdf8]">
+      🧠 AI-Powered DSA Roadmap
+    </h1>
+    <div className="max-w-4xl mx-auto">
       <textarea
         value={prompt}
         onChange={(e) => setPrompt(e.target.value)}
         rows="3"
-        className="sm:w-[400px] sm:ml-[90px] md:w-[450px] md:ml-[180px] lg:ml-[300px] xl:ml-[500px] p-4 border border-gray-300 rounded-lg focus:ring-2 text-[#38bdf8] focus:ring-blue-500 outline-none bg-[#0f172a] resize-none"
+        className="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 text-[#38bdf8] focus:ring-blue-500 outline-none bg-[#0f172a] resize-none"
+        placeholder="Enter your roadmap topic"
       />
-       <br></br>
+    </div>
+
+    <div className="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-center gap-4 mt-4">
       <button
         onClick={handleGenerate}
         disabled={loading}
-        className={`mt-4 w-full sm:w-auto md:ml-[300px] lg:ml-[430px] xl:ml-[630px] bg-[#38bdf8] hover:bg-[#00000033] text-white font-semibold py-3 px-6 rounded-lg transition ${
-          loading && "cursor-not-allowed"
-        }`}
+        className="w-full sm:w-auto bg-[#38bdf8] hover:bg-[#00000033] text-white font-semibold py-3 px-6 rounded-lg transition"
       >
-       Generate RoadMap 
+        Generate New Roadmap
       </button>
 
-      {error && <p className="text-red-500 text-center mt-4">{error}</p>}
-      <div className="bg-[#00000033]">
-      {roadmap && (
-        <div className="w-screen mx-auto mt-8 bg-black/20 text-[#38bdf8] p-6 rounded-lg whitespace-pre-wrap">
-          {roadmap}
-        </div>
-      )}
-      </div>
+      <button
+        onClick={post_data}
+        className="w-full sm:w-auto bg-[#38bdf8] hover:bg-[#00000033] text-white font-semibold py-3 px-6 rounded-lg transition"
+      >
+        Store this roadmap
+      </button>
+
+      <button
+        onClick={() => get_roadmap(user.id)}
+        className="w-full sm:w-auto bg-[#38bdf8] hover:bg-[#00000033] text-white font-semibold py-3 px-6 rounded-lg transition"
+      >
+        Get the roadmap you stored
+      </button>
     </div>
-  );
+
+    
+    {error && <p className="text-red-500 text-center mt-4">{error}</p>}
+
+    
+    {roadmap && (
+      <div className="max-w-5xl mx-auto mt-8 bg-black/20 text-[#38bdf8] p-6 rounded-lg whitespace-pre-wrap">
+        {roadmap}
+      </div>
+    )}
+  </div>
+);
 }
