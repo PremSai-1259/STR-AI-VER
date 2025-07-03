@@ -59,7 +59,7 @@ export default function Roadmap() {
 //ROADMAP TO DB
   async function post_data(){
     if(roadmap){
-    const{d}= await supabase.from("Roadmaps").delete().eq("id",user.id) //to make sure only one roadmap is stored
+    const{d}= await supabase.from("Roadmaps").delete().eq("id",user.id) //to make sure only one roadmap is stored under on user id
     const{data,error}=await supabase.from("Roadmaps").insert([{
       "id":user.id,
       "roadmap":roadmap,
@@ -69,7 +69,7 @@ export default function Roadmap() {
       alert("error",error.message)
     }
     else{
-      alert("data is added")
+      alert("roadmap is stored")
     }
     }
   else{
@@ -80,7 +80,7 @@ export default function Roadmap() {
 
 //GET ROADMAP
 async function get_roadmap(){
-  const{data,error}=await supabase.from("Roadmaps").select().eq("id",user.id)
+  const{data,error}=await supabase.from("Roadmaps").select().eq("id",user.id) //this return array of object
   if (error) {
     console.log("Fetch error", error.message);
     return;
