@@ -50,7 +50,7 @@ export default function Roadmap() {
     setRoadmap(text || "No roadmap returned.");
   } catch (err) {
     console.error(err);
-    setError(" Gemini API request failed. Please check console and .env.");
+    setError(" Gemini API request failed.");
   } finally {
     setLoading(false);
   }
