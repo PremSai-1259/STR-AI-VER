@@ -1,12 +1,44 @@
 import { useUser } from "@clerk/clerk-react";
 import { useNavigate } from "react-router-dom";
 import { SignOutButton } from "@clerk/clerk-react";
+import supabase from "../lib/supadb";
+import { useEffect } from "react";
 
 function Dashboard() {
   const { user } = useUser();
   const navigate = useNavigate();
 
-  if (!user) return null;
+
+  useEffect(() => {
+   
+    async function saveUserToSupabase() {
+      if (!user) return;
+      const { data: existing, error: fetchError } = await supabase
+        .from("Users")
+        .select("id")
+        .eq("id", user.id)
+        .single();
+
+      if (existing) return; // already stored in DB
+
+      // Step 2: If not, insert new user
+      const { error } = await supabase.from("Users").insert([
+        {
+          id: user.id,
+          name: user.fullName,
+          email: user.primaryEmailAddress?.emailAddress, // optional
+        },
+      ]);
+
+      if (error) {
+        console.error("Failed to save user:", error.message);
+      } else {
+        console.log("✅ User saved to Supabase");
+      }
+    }
+
+    saveUserToSupabase();
+  }, [user]);
 
   return (
    <div className="w-screen min-h-screen bg-[#182035] px-4 pb-10">
