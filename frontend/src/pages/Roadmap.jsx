@@ -3,7 +3,7 @@ import { useState } from "react";
 import { SignOutButton } from "@clerk/clerk-react";
 import BrainLoading from "../components/Loading";
 import supabase from "../lib/supadb";
-import { useParams } from "react-router-dom";
+
 
 
 export default function Roadmap() {
@@ -13,7 +13,7 @@ export default function Roadmap() {
   const [error, setError] = useState("");
   const { user } = useUser();
   if (!user) return null;
-  const {id} = useParams()
+
 
   //Generate roadmap
  const handleGenerate = async () => {
@@ -59,7 +59,7 @@ export default function Roadmap() {
 //ROADMAP TO DB
   async function post_data(){
     if(roadmap){
-    const{d}= await supabase.from("Roadmaps").delete().eq("id",id) //to make sure only one roadmap is stored
+    const{d}= await supabase.from("Roadmaps").delete().eq("id",user.id) //to make sure only one roadmap is stored
     const{data,error}=await supabase.from("Roadmaps").insert([{
       "id":user.id,
       "roadmap":roadmap,
@@ -80,7 +80,7 @@ export default function Roadmap() {
 
 //GET ROADMAP
 async function get_roadmap(){
-  const{data,error}=await supabase.from("Roadmaps").select().eq("id",id)
+  const{data,error}=await supabase.from("Roadmaps").select().eq("id",user.id)
   if (error) {
     console.log("Fetch error", error.message);
     return;

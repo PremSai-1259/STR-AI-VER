@@ -25,7 +25,7 @@ function Dashboard() {
     </div>
     <div className="flex flex-col sm:flex-row justify-center items-center gap-80 px-4 mt-[100px]">
        <button className="border-2 border-[#00000033] h-[300px] w-[300px] text-[28px] text-white bg-[#00000033] rounded-[24px]
-        hover:cursor-pointer hover:text-[#38bdf8] hover:text-[30px] my-3" onClick={()=>{navigate(`/roadmap/${user.id}`)}}>
+        hover:cursor-pointer hover:text-[#38bdf8] hover:text-[30px] my-3" onClick={()=>{navigate('/roadmap')}}>
         <div>Generate Personalized DSA Road Map</div>
        </button>
         <button className="border-2 border-[#00000033] h-[300px] w-[300px] text-[30px] text-white bg-[#00000033] rounded-[24px]
