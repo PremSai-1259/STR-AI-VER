@@ -13,6 +13,7 @@ export default function Roadmap() {
   const { user } = useUser();
   if (!user) return null;
 
+  //Generate roadmap
  const handleGenerate = async () => {
   if (!prompt.trim()) return;
 
@@ -56,7 +57,7 @@ export default function Roadmap() {
 //ROADMAP TO DB
   async function post_data(){
     if(roadmap){
-    const{d}= await supabase.from("Roadmaps").delete().eq("id",user.id)
+    const{d}= await supabase.from("Roadmaps").delete().eq("id",user.id) //to make sure only one roadmap is stored
     const{data,error}=await supabase.from("Roadmaps").insert([{
       "id":user.id,
       "roadmap":roadmap,
@@ -76,8 +77,8 @@ export default function Roadmap() {
   }
 
 //GET ROADMAP
-async function get_roadmap(id){
-  const{data}=await supabase.from("Roadmaps").select().eq("id",id)
+async function get_roadmap(){
+  const{data,error}=await supabase.from("Roadmaps").select().eq("id",user.id)
   if (error) {
     console.log("Fetch error", error.message);
     return;
@@ -142,7 +143,7 @@ async function get_roadmap(id){
       </button>
 
       <button
-        onClick={() => get_roadmap(user.id)}
+        onClick={get_roadmap}
         className="w-full sm:w-auto bg-[#38bdf8] hover:bg-[#00000033] text-white font-semibold py-3 px-6 rounded-lg transition"
       >
         Get the roadmap you stored
