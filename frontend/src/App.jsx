@@ -36,7 +36,7 @@ function App() {
           </>
         }
         />
-        <Route path="/roadmap" 
+        <Route path="/roadmap/:id" 
         element={
           <>
           <SignedIn>
