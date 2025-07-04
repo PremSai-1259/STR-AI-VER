@@ -31,9 +31,9 @@ function Dashboard() {
       ]);
 
       if (error) {
-        console.error("Failed to save user:", error.message);
+        alert("ERROR",error.message)
       } else {
-        console.log("✅ User saved to Supabase");
+        alert("Credentials saved")
       }
     }
 
